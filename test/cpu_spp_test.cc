@@ -14,7 +14,31 @@ TEST(NaiveSPP, CorrectnessTest) {
 
   pp::Graph g(es, vs);
 
-  auto res = pp::NaiveSPP(g, 0);
+  auto res = pp::BetterSPP(g, 0);
+
+  spdlog::info("{}\n", fmt::join(res, ", "));
+}
+
+TEST(BetterSPP, CorrectnessTest) {
+  std::vector<pp::Edge> es = {
+      {0, 2, 5}, {0, 4, 1}, {1, 3, 1}, {2, 3, 4}, {4, 1, 2}, {4, 2, 3},
+  };
+
+  std::vector<pp::Vertex> vs = {0, 1, 2, 3, 4};
+
+  pp::Graph g(es, vs);
+
+  auto res = pp::BetterSPP(g, 0);
+
+  spdlog::info("{}\n", fmt::join(res, ", "));
+}
+
+TEST(BetterSPP, SmallDataSetTest) {
+  auto [es, vs] = pp::ReadGraphFile("./data/USA-road-d.NY.gr");
+
+  pp::Graph g(es, vs);
+
+  auto res = pp::BetterSPP(g, 0);
 
   spdlog::info("{}\n", fmt::join(res, ", "));
 }
@@ -25,7 +49,6 @@ TEST(NaiveSPP, SmallDataSetTest) {
   pp::Graph g(es, vs);
 
   auto res = pp::NaiveSPP(g, 0);
-
 
   spdlog::info("{}\n", fmt::join(res, ", "));
 }

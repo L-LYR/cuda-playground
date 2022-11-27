@@ -6,7 +6,7 @@ cpu_pp_source_file = files(
 libcpu_pp = library(
     'cpu_pp',
     cpu_pp_source_file,
-    dependencies: deps,
+    dependencies: deps + dependency('boost'),
     include_directories: incs,
 )
 
